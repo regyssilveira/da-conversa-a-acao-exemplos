@@ -1,0 +1,4 @@
+pedido_id,destino,assunto,objetivo,fonte_id,decisao
+PED-1301,destinatario@example.invalid,Confirmação do laboratório,confirmar recebimento de um material fictício,REG-1301,aprovado
+PED-1302,destinatario@example.invalid,Teste recusado,não deve produzir envio,REG-1302,rejeitado
+PED-1303,destinatario@example.invalid,Teste expirado,não deve produzir envio,REG-1303,expirado
