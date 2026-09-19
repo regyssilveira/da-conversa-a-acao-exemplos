@@ -1,0 +1,50 @@
+{
+  "name": "Capítulo 7 - Triagem com OpenAI",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "7d92fe99-c7d8-4f98-bde2-55ca8f90ab11",
+      "name": "Executar manualmente",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-520, 80]
+    },
+    {
+      "parameters": {
+        "assignments": {"assignments": [{"id": "a11251e9-fdc5-4db2-b331-53463fbb9aae", "name": "mensagem", "value": "A apresentação mudou para sexta. Você pode revisar os slides até amanhã à tarde?", "type": "string"}]},
+        "options": {}
+      },
+      "id": "b672d982-a101-437f-b807-89b1e107ccfb",
+      "name": "Carregar mensagem fictícia",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-280, 80]
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "operation": "message",
+        "modelId": {"__rl": true, "value": "gpt-4o-mini", "mode": "list", "cachedResultName": "GPT-4O-MINI"},
+        "messages": {"values": [{"content": "=Você classifica mensagens fictícias para uma automação de estudo. Use somente o conteúdo recebido. Não invente pessoas, prazos ou fatos. Categorias permitidas: tarefa, reunião, informação, outro. Urgência permitida: alta, normal, incerta. Use alta somente quando houver prazo próximo ou urgência explícita. Use incerta quando não houver evidência suficiente. Marque precisa_revisao como verdadeiro quando houver ambiguidade, conflito, dado insuficiente ou conteúdo fora das categorias. Responda apenas em JSON com as chaves categoria, urgencia, resumo, precisa_revisao.\n\nMENSAGEM A CLASSIFICAR:\n{{ $json.mensagem }}"}]},
+        "simplify": true,
+        "jsonOutput": true,
+        "options": {}
+      },
+      "id": "440c9c61-f576-4b18-a250-1940c5bf12fc",
+      "name": "Classificar com OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [-20, 80]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Executar manualmente": {"main": [[{"node": "Carregar mensagem fictícia", "type": "main", "index": 0}]]},
+    "Carregar mensagem fictícia": {"main": [[{"node": "Classificar com OpenAI", "type": "main", "index": 0}]]}
+  },
+  "active": false,
+  "settings": {"executionOrder": "v1"},
+  "versionId": "b65e7f28-38b9-4b30-8cf6-126eac581811",
+  "meta": {"templateCredsSetupCompleted": false},
+  "tags": []
+}

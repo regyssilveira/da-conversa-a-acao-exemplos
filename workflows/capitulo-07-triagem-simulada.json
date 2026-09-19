@@ -1,0 +1,100 @@
+{
+  "name": "Capítulo 7 - Triagem simulada",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "b8de3a5c-b2fb-4f7b-a845-a107429879e1",
+      "name": "Executar manualmente",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-520, 80]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2b7314f3-0c15-474a-a9a5-fb9a9a922f87",
+              "name": "mensagem",
+              "value": "A apresentação mudou para sexta. Você pode revisar os slides até amanhã à tarde?",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "26773f8b-2d65-4622-b518-8c665d2c82e8",
+      "name": "Carregar mensagem fictícia",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-280, 80]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ab417de8-2cb0-461c-9783-bc674d351f05",
+              "name": "categoria",
+              "value": "tarefa",
+              "type": "string"
+            },
+            {
+              "id": "a330d344-7066-44ad-9f93-cf67277b9a25",
+              "name": "urgencia",
+              "value": "alta",
+              "type": "string"
+            },
+            {
+              "id": "18f8a259-8024-459d-8070-a2c6e338c45b",
+              "name": "resumo",
+              "value": "Revisar os slides até amanhã à tarde.",
+              "type": "string"
+            },
+            {
+              "id": "3423d361-397f-4994-841c-7464e95f4042",
+              "name": "precisa_revisao",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3d4ce2ea-f781-49f9-a3da-89fdfb0d2784",
+      "name": "Simular resposta da IA",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-20, 80]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {"id": "d2938e47-0267-497c-879b-61e19a8d9061", "name": "categoria", "value": "={{ $json.categoria }}", "type": "string"},
+            {"id": "d92c1ad9-54e4-43ca-b898-6b6357ef713f", "name": "urgencia", "value": "={{ $json.urgencia }}", "type": "string"},
+            {"id": "71fd6be9-c750-491d-b725-ce969d79d277", "name": "resumo", "value": "={{ $json.resumo }}", "type": "string"},
+            {"id": "15b279ce-60c5-4e9b-bf0d-6328624f9e6e", "name": "precisa_revisao", "value": "={{ $json.precisa_revisao }}", "type": "boolean"}
+          ]
+        },
+        "options": {}
+      },
+      "id": "ff5cf4e9-a811-4f09-a75d-c187b8317f5d",
+      "name": "Exibir quatro campos",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [240, 80]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Executar manualmente": {"main": [[{"node": "Carregar mensagem fictícia", "type": "main", "index": 0}]]},
+    "Carregar mensagem fictícia": {"main": [[{"node": "Simular resposta da IA", "type": "main", "index": 0}]]},
+    "Simular resposta da IA": {"main": [[{"node": "Exibir quatro campos", "type": "main", "index": 0}]]}
+  },
+  "active": false,
+  "settings": {"executionOrder": "v1"},
+  "versionId": "7c797c19-0f27-4968-93a6-dbc450a0dd9e",
+  "meta": {"templateCredsSetupCompleted": false},
+  "tags": []
+}

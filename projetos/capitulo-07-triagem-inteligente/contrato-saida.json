@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "categoria": {
+      "type": "string",
+      "enum": ["tarefa", "reunião", "informação", "outro"]
+    },
+    "urgencia": {
+      "type": "string",
+      "enum": ["alta", "normal", "incerta"]
+    },
+    "resumo": {
+      "type": "string"
+    },
+    "precisa_revisao": {
+      "type": "boolean"
+    }
+  },
+  "required": ["categoria", "urgencia", "resumo", "precisa_revisao"],
+  "additionalProperties": false
+}
