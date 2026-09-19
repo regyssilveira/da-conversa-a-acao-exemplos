@@ -1,0 +1,12 @@
+{
+  "name":"Capítulo 14 - Meu Assistente Digital base",
+  "nodes":[
+    {"parameters":{},"id":"1401","name":"Executar manualmente","type":"n8n-nodes-base.manualTrigger","typeVersion":1,"position":[-620,0]},
+    {"parameters":{"assignments":{"assignments":[{"id":"f1","name":"caso_id","value":"CT-01","type":"string"},{"id":"f2","name":"entrada","value":"Tarefa fictícia com campos completos","type":"string"},{"id":"f3","name":"valida","value":true,"type":"boolean"},{"id":"f4","name":"acao_permitida","value":"PREPARAR_RASCUNHO","type":"string"}]}},"id":"1402","name":"Carregar entrada fictícia","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[-390,0]},
+    {"parameters":{"conditions":{"options":{"caseSensitive":true,"typeValidation":"strict"},"conditions":[{"leftValue":"={{ $json.valida }}","rightValue":true,"operator":{"type":"boolean","operation":"true","singleValue":true}}],"combinator":"and"}},"id":"1403","name":"Entrada válida?","type":"n8n-nodes-base.if","typeVersion":2.2,"position":[-140,0]},
+    {"parameters":{"assignments":{"assignments":[{"id":"f5","name":"resultado","value":"RASCUNHO_SIMULADO_PARA_REVISAO","type":"string"}]}},"id":"1404","name":"Produzir saída segura","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[120,-100]},
+    {"parameters":{"assignments":{"assignments":[{"id":"f6","name":"erro","value":"ENTRADA_INVALIDA_REVISAO_NECESSARIA","type":"string"}]}},"id":"1405","name":"Encaminhar para revisão","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[120,120]}
+  ],
+  "connections":{"Executar manualmente":{"main":[[{"node":"Carregar entrada fictícia","type":"main","index":0}]]},"Carregar entrada fictícia":{"main":[[{"node":"Entrada válida?","type":"main","index":0}]]},"Entrada válida?":{"main":[[{"node":"Produzir saída segura","type":"main","index":0}],[{"node":"Encaminhar para revisão","type":"main","index":0}]]}},
+  "pinData":{},"active":false,"settings":{"executionOrder":"v1"},"versionId":"14000000-0000-4000-8000-000000000001","meta":{"templateCredsSetupCompleted":false},"tags":[]
+}

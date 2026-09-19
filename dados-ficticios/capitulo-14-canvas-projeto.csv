@@ -1,0 +1,10 @@
+campo,resposta_exemplo
+tarefa,Preparar plano semanal fictício
+gatilho,Segunda-feira às 7h inicialmente manual
+fontes,Agenda e tarefas de laboratório
+resultado,Plano com compromissos prioridades conflitos e lacunas
+acoes_permitidas,Ler ordenar resumir exibir
+acoes_proibidas,Criar alterar enviar excluir
+excecao,Falha visível e encerramento
+proprietario,OPERADOR_DO_LABORATORIO
+revisao,Mensal durante o piloto

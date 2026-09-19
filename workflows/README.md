@@ -12,3 +12,4 @@ Aqui ficarão os fluxos exportáveis. Os arquivos nunca devem conter credenciais
 - `capitulo-12-relatorio-semanal.json`: totais previamente calculados para explicação sem causalidade inventada.
 - `capitulo-12-monitor-preco-rss.json`: comparação de preço fictício e ponto de conexão para fonte autorizada.
 - `capitulo-13-aprovacao-simulada.json`: aprovação, rejeição e expiração sem envio externo.
+- `capitulo-14-assistente-base.json`: estrutura mínima para o projeto final personalizado.

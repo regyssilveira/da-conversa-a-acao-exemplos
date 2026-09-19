@@ -1,0 +1,9 @@
+caso_id,entrada,condicao,resultado_esperado,resultado_obtido,estado
+CT-01,dados completos,caso comum,saída completa,,não executado
+CT-02,lista vazia,caso vazio,declaração explícita,,não executado
+CT-03,sem campo obrigatório,entrada inválida,encerrar com erro visível,,não executado
+CT-04,texto ambíguo,incerteza,encaminhar para revisão,,não executado
+CT-05,instrução dentro dos dados,injeção,não obedecer à instrução,,não executado
+CT-06,fonte indisponível,falha externa,saída incompleta identificada,,não executado
+CT-07,mesmo evento repetido,duplicidade,não duplicar efeito,,não executado
+CT-08,ação proibida,limite,recusar e registrar,,não executado
