@@ -1,0 +1,26 @@
+{
+  "name": "Capítulo 8 - Decisões e rotas",
+  "nodes": [
+    {"parameters": {}, "id": "1", "name": "Executar manualmente", "type": "n8n-nodes-base.manualTrigger", "typeVersion": 1, "position": [-600, 0]},
+    {"parameters": {"assignments": {"assignments": [
+      {"id":"21","name":"categoria","value":"outro","type":"string"},
+      {"id":"22","name":"urgencia","value":"incerta","type":"string"},
+      {"id":"23","name":"resumo","value":"Pedido sem informação suficiente.","type":"string"},
+      {"id":"24","name":"precisa_revisao","value":true,"type":"boolean"}
+    ]}, "options": {}}, "id": "2", "name": "Classificação simulada", "type": "n8n-nodes-base.set", "typeVersion": 3.4, "position": [-380, 0]},
+    {"parameters": {"rules": {"values": [
+      {"conditions":{"options":{"caseSensitive":true,"leftValue":"","typeValidation":"strict"},"conditions":[{"leftValue":"={{ $json.precisa_revisao || $json.urgencia === 'incerta' }}","rightValue":true,"operator":{"type":"boolean","operation":"true","singleValue":true}}],"combinator":"and"},"renameOutput":true,"outputKey":"revisao"},
+      {"conditions":{"options":{"caseSensitive":true,"leftValue":"","typeValidation":"strict"},"conditions":[{"leftValue":"={{ $json.urgencia }}","rightValue":"alta","operator":{"type":"string","operation":"equals"}}],"combinator":"and"},"renameOutput":true,"outputKey":"alta"},
+      {"conditions":{"options":{"caseSensitive":true,"leftValue":"","typeValidation":"strict"},"conditions":[{"leftValue":"={{ $json.urgencia }}","rightValue":"normal","operator":{"type":"string","operation":"equals"}}],"combinator":"and"},"renameOutput":true,"outputKey":"normal"}
+    ]},"options":{"fallbackOutput":"extra"}}, "id":"3","name":"Escolher rota","type":"n8n-nodes-base.switch","typeVersion":3.2,"position":[-120,0]},
+    {"parameters":{"assignments":{"assignments":[{"id":"41","name":"fila","value":"revisao_humana","type":"string"},{"id":"42","name":"motivo_rota","value":"Incerteza, revisão solicitada ou valor inesperado.","type":"string"}]},"options":{}},"id":"4","name":"Preparar revisão humana","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[180,-180]},
+    {"parameters":{"assignments":{"assignments":[{"id":"51","name":"fila","value":"prioridade_alta","type":"string"},{"id":"52","name":"motivo_rota","value":"Prazo próximo ou urgência explícita, sem sinal de revisão.","type":"string"}]},"options":{}},"id":"5","name":"Preparar prioridade alta","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[180,0]},
+    {"parameters":{"assignments":{"assignments":[{"id":"61","name":"fila","value":"normal","type":"string"},{"id":"62","name":"motivo_rota","value":"Classificação válida sem urgência alta.","type":"string"}]},"options":{}},"id":"6","name":"Preparar fila normal","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[180,180]}
+  ],
+  "connections": {
+    "Executar manualmente":{"main":[[{"node":"Classificação simulada","type":"main","index":0}]]},
+    "Classificação simulada":{"main":[[{"node":"Escolher rota","type":"main","index":0}]]},
+    "Escolher rota":{"main":[[{"node":"Preparar revisão humana","type":"main","index":0}],[{"node":"Preparar prioridade alta","type":"main","index":0}],[{"node":"Preparar fila normal","type":"main","index":0}],[{"node":"Preparar revisão humana","type":"main","index":0}]]}
+  },
+  "pinData": {}, "active": false, "settings": {"executionOrder":"v1"}, "versionId":"11111111-2222-4333-8444-555555555555", "meta":{"templateCredsSetupCompleted":false}, "tags":[]
+}
