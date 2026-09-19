@@ -1,0 +1,11 @@
+{
+  "name":"Capítulo 12 - Relatório semanal",
+  "nodes":[
+    {"parameters":{},"id":"1221","name":"Executar manualmente","type":"n8n-nodes-base.manualTrigger","typeVersion":1,"position":[-660,0]},
+    {"parameters":{"assignments":{"assignments":[{"id":"c1","name":"tabela","value":"revisão: quantidade 7, registros 2; automação: quantidade 11, registros 2; total: 18","type":"string"}]}},"id":"1222","name":"Carregar resumo calculado","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[-420,0]},
+    {"parameters":{"promptType":"define","text":"=Tabela calculada: {{ $json.tabela }}","options":{"systemMessage":"Redija Resumo, Destaques e Dados insuficientes. Copie os números sem recalculá-los. Não atribua causas. Se um dado não estiver na tabela, diga que está ausente."}},"id":"1223","name":"Explicar resultados","type":"@n8n/n8n-nodes-langchain.agent","typeVersion":2.2,"position":[-120,0]},
+    {"parameters":{"options":{}},"id":"1224","name":"Modelo de conversa OpenAI","type":"@n8n/n8n-nodes-langchain.lmChatOpenAi","typeVersion":1.2,"position":[-120,220]}
+  ],
+  "connections":{"Executar manualmente":{"main":[[{"node":"Carregar resumo calculado","type":"main","index":0}]]},"Carregar resumo calculado":{"main":[[{"node":"Explicar resultados","type":"main","index":0}]]},"Modelo de conversa OpenAI":{"ai_languageModel":[[{"node":"Explicar resultados","type":"ai_languageModel","index":0}]]}},
+  "pinData":{},"active":false,"settings":{"executionOrder":"v1"},"versionId":"12000000-0000-4000-8000-000000000003","meta":{"templateCredsSetupCompleted":false},"tags":[]
+}

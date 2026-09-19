@@ -1,0 +1,6 @@
+registro_id,data,categoria,quantidade,estado
+ATV-401,2026-09-14,revisão,4,concluído
+ATV-402,2026-09-15,automação,6,concluído
+ATV-403,2026-09-17,revisão,3,concluído
+ATV-404,2026-09-18,automação,5,em andamento
+ATV-405,2026-09-21,revisão,9,fora do período

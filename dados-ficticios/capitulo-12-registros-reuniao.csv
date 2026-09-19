@@ -1,0 +1,4 @@
+fonte_id,evento_id,data,assunto,estado,observacao
+REG-301,EVT-101,2026-09-18,Escopo do exemplo,aberto,Dois itens ainda precisam de confirmação
+REG-302,EVT-101,2026-09-19,Teste do fluxo,concluído,Execução fictícia passou sem escrita externa
+REG-303,EVT-999,2026-09-17,Assunto não relacionado,aberto,Não deve entrar no dossiê

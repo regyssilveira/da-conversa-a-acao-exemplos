@@ -1,0 +1,11 @@
+{
+  "name":"Capítulo 12 - Planejador diário",
+  "nodes":[
+    {"parameters":{},"id":"1201","name":"Executar manualmente","type":"n8n-nodes-base.manualTrigger","typeVersion":1,"position":[-620,0]},
+    {"parameters":{"assignments":{"assignments":[{"id":"a1","name":"eventos","value":"EVT-101 09:00-09:45 Revisão do projeto fictício; EVT-102 09:30-10:15 Planejamento da semana; EVT-103 14:00-15:00 Bloco de estudo","type":"string"},{"id":"a2","name":"tarefas","value":"TAR-201 prazo 2026-09-21 aberta alta; TAR-202 prazo 2026-09-23 em andamento média; TAR-204 prazo ausente aberta alta","type":"string"}]}},"id":"1202","name":"Carregar dados fictícios","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[-400,0]},
+    {"parameters":{"promptType":"define","text":"=Eventos: {{ $json.eventos }}\nTarefas: {{ $json.tarefas }}","options":{"systemMessage":"Crie um rascunho com Compromissos, Prioridades, Conflitos e Lacunas. Use somente os dados recebidos. Cite IDs. Não invente horários ou prazos e não execute ações."}},"id":"1203","name":"Redigir plano","type":"@n8n/n8n-nodes-langchain.agent","typeVersion":2.2,"position":[-120,0]},
+    {"parameters":{"options":{}},"id":"1204","name":"Modelo de conversa OpenAI","type":"@n8n/n8n-nodes-langchain.lmChatOpenAi","typeVersion":1.2,"position":[-120,220]}
+  ],
+  "connections":{"Executar manualmente":{"main":[[{"node":"Carregar dados fictícios","type":"main","index":0}]]},"Carregar dados fictícios":{"main":[[{"node":"Redigir plano","type":"main","index":0}]]},"Modelo de conversa OpenAI":{"ai_languageModel":[[{"node":"Redigir plano","type":"ai_languageModel","index":0}]]}},
+  "pinData":{},"active":false,"settings":{"executionOrder":"v1"},"versionId":"12000000-0000-4000-8000-000000000001","meta":{"templateCredsSetupCompleted":false},"tags":[]
+}

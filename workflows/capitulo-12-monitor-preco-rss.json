@@ -1,0 +1,10 @@
+{
+  "name":"Capítulo 12 - Monitor de preço com fonte autorizada",
+  "nodes":[
+    {"parameters":{},"id":"1231","name":"Executar manualmente","type":"n8n-nodes-base.manualTrigger","typeVersion":1,"position":[-500,0]},
+    {"parameters":{"assignments":{"assignments":[{"id":"d1","name":"produto","value":"Produto fictício","type":"string"},{"id":"d2","name":"preco","value":89.9,"type":"number"},{"id":"d3","name":"limite","value":100,"type":"number"},{"id":"d4","name":"fonte","value":"FONTE_AUTORIZADA_A_CONFIGURAR","type":"string"}]}},"id":"1232","name":"Carregar item fictício","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[-260,0]},
+    {"parameters":{"conditions":{"options":{"caseSensitive":true,"leftValue":"","typeValidation":"strict"},"conditions":[{"id":"d5","leftValue":"={{ $json.preco }}","rightValue":"={{ $json.limite }}","operator":{"type":"number","operation":"lte"}}],"combinator":"and"}},"id":"1233","name":"Preço atingiu o limite?","type":"n8n-nodes-base.if","typeVersion":2.2,"position":[0,0]}
+  ],
+  "connections":{"Executar manualmente":{"main":[[{"node":"Carregar item fictício","type":"main","index":0}]]},"Carregar item fictício":{"main":[[{"node":"Preço atingiu o limite?","type":"main","index":0}]]}},
+  "pinData":{},"active":false,"settings":{"executionOrder":"v1"},"versionId":"12000000-0000-4000-8000-000000000004","meta":{"templateCredsSetupCompleted":false},"tags":[]
+}
