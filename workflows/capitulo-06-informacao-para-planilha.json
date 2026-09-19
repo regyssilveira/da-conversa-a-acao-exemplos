@@ -1,0 +1,67 @@
+{
+  "name": "Capítulo 6 - Informação para planilha",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "6abbbfda-26b0-468c-bec4-8660ad206001",
+      "name": "Executar manualmente",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-500, 0]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {"id": "d8698dc7-c5d7-4d56-a555-acde10016001", "name": "data", "value": "2026-09-21", "type": "string"},
+            {"id": "d8698dc7-c5d7-4d56-a555-acde10016002", "name": "assunto", "value": "Planejamento semanal", "type": "string"},
+            {"id": "d8698dc7-c5d7-4d56-a555-acde10016003", "name": "status", "value": "novo", "type": "string"},
+            {"id": "d8698dc7-c5d7-4d56-a555-acde10016004", "name": "observacao", "value": "Registro fictício para teste", "type": "string"}
+          ]
+        },
+        "options": {}
+      },
+      "id": "e44b8924-f8ae-4d58-8514-acde72326002",
+      "name": "Criar registro fictício",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-260, 0]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {"__rl": true, "value": "SUBSTITUA_PELO_ID_DA_PLANILHA", "mode": "id"},
+        "sheetName": {"__rl": true, "value": "Registros", "mode": "name"},
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "data": "={{ $json.data }}",
+            "assunto": "={{ $json.assunto }}",
+            "status": "={{ $json.status }}",
+            "observacao": "={{ $json.observacao }}"
+          },
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "0ab1b9a8-ef64-4ffc-8cd8-acde7d496003",
+      "name": "Adicionar linha na planilha",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [0, 0]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Executar manualmente": {"main": [[{"node": "Criar registro fictício", "type": "main", "index": 0}]]},
+    "Criar registro fictício": {"main": [[{"node": "Adicionar linha na planilha", "type": "main", "index": 0}]]}
+  },
+  "active": false,
+  "settings": {"executionOrder": "v1"},
+  "versionId": "c08f7c0e-acde-477b-b258-acde70426004",
+  "meta": {"templateCredsSetupCompleted": false},
+  "tags": []
+}

@@ -1,0 +1,83 @@
+{
+  "name": "Capítulo 6 - Agenda para lista",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "f7010df0-c606-4407-b822-0606a7106001",
+      "name": "Executar manualmente",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-420, 0]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "primary",
+          "mode": "list",
+          "cachedResultName": "Calendário principal"
+        },
+        "returnAll": true,
+        "timeMin": "={{ $now }}",
+        "timeMax": "={{ $now.plus({ week: 1 }) }}",
+        "options": {
+          "orderBy": "startTime",
+          "singleEvents": true
+        }
+      },
+      "id": "03b70ef9-d24a-4b5d-9a45-acde7b456002",
+      "name": "Ler próximos compromissos",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [-160, 0]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ec64a576-897e-4c30-84fd-acde4ec16001",
+              "name": "titulo",
+              "value": "={{ $json.summary || 'Sem título' }}",
+              "type": "string"
+            },
+            {
+              "id": "ec64a576-897e-4c30-84fd-acde4ec16002",
+              "name": "inicio",
+              "value": "={{ $json.start.dateTime || $json.start.date }}",
+              "type": "string"
+            },
+            {
+              "id": "ec64a576-897e-4c30-84fd-acde4ec16003",
+              "name": "estado",
+              "value": "={{ $json.status }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": false,
+        "options": {}
+      },
+      "id": "d35f2578-c6ae-4492-9817-acdecb526003",
+      "name": "Manter campos necessários",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [100, 0]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Executar manualmente": {
+      "main": [[{"node": "Ler próximos compromissos", "type": "main", "index": 0}]]
+    },
+    "Ler próximos compromissos": {
+      "main": [[{"node": "Manter campos necessários", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {"executionOrder": "v1"},
+  "versionId": "332ad81d-c91b-4176-9c1b-acde77456006",
+  "meta": {"templateCredsSetupCompleted": false},
+  "tags": []
+}

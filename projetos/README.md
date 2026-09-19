@@ -5,3 +5,4 @@ Os projetos serão numerados na mesma ordem de aprendizagem do livro. Cada pasta
 ## Projetos disponíveis
 
 - `capitulo-05-primeiro-fluxo/`: primeiro workflow importável, sem credenciais.
+- `capitulo-06-aplicativos-conversando/`: leitura de agenda e escrita controlada em planilha.
