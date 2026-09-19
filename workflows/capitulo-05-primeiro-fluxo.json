@@ -1,0 +1,84 @@
+{
+  "name": "Capítulo 5 - Meu primeiro resumo",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "c7e9b29a-2d93-4d94-9b52-0b6f1a88e001",
+      "name": "Ao clicar em Executar workflow",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-520, 0]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "68ce8adc-f0d8-43a1-96ff-e962c90ea001",
+              "name": "data",
+              "value": "2026-09-21",
+              "type": "string"
+            },
+            {
+              "id": "68ce8adc-f0d8-43a1-96ff-e962c90ea002",
+              "name": "compromisso",
+              "value": "Revisar o planejamento da semana",
+              "type": "string"
+            },
+            {
+              "id": "68ce8adc-f0d8-43a1-96ff-e962c90ea003",
+              "name": "prioridade",
+              "value": "normal",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2c69c855-ff88-42cf-b986-3c09a56be002",
+      "name": "Criar dados fictícios",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-280, 0]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2fca5430-c487-4c46-9f09-ef324e93a001",
+              "name": "resumo",
+              "value": "=Em {{ $json.data }}, lembre-se de: {{ $json.compromisso }}. Prioridade: {{ $json.prioridade }}.",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "57b0ce9f-bbba-4b96-a7d0-cf37b653e003",
+      "name": "Montar resumo",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-40, 0]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Ao clicar em Executar workflow": {
+      "main": [[{"node": "Criar dados fictícios", "type": "main", "index": 0}]]
+    },
+    "Criar dados fictícios": {
+      "main": [[{"node": "Montar resumo", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5e26fb99-7f91-4dc6-ae93-0e7f9ee5c005",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": []
+}
