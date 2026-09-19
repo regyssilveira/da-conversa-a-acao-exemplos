@@ -1,0 +1,9 @@
+{
+  "name":"Capítulo 10 - Ferramenta registros simulada",
+  "nodes":[
+    {"parameters":{"workflowInputs":{"values":[{"name":"status"}]}},"id":"111","name":"Entrada da ferramenta","type":"n8n-nodes-base.executeWorkflowTrigger","typeVersion":1.1,"position":[-260,0]},
+    {"parameters":{"assignments":{"assignments":[{"id":"1121","name":"data","value":"2026-09-21","type":"string"},{"id":"1122","name":"assunto","value":"Preparar pauta","type":"string"},{"id":"1123","name":"status","value":"novo","type":"string"},{"id":"1124","name":"observacao","value":"Registro fictício","type":"string"}]},"options":{}},"id":"112","name":"Devolver registro fictício","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[0,0]}
+  ],
+  "connections":{"Entrada da ferramenta":{"main":[[{"node":"Devolver registro fictício","type":"main","index":0}]]}},
+  "pinData":{},"active":false,"settings":{"executionOrder":"v1"},"versionId":"10b00000-0000-4000-8000-000000000002","meta":{"templateCredsSetupCompleted":false},"tags":[]
+}

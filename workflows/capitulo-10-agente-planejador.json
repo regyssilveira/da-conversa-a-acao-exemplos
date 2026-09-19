@@ -1,0 +1,19 @@
+{
+  "name":"Capítulo 10 - Agente planejador",
+  "nodes":[
+    {"parameters":{},"id":"121","name":"Executar manualmente","type":"n8n-nodes-base.manualTrigger","typeVersion":1,"position":[-560,0]},
+    {"parameters":{"assignments":{"assignments":[{"id":"1221","name":"pedido","value":"Prepare um panorama de amanhã. Liste os compromissos e os registros com status novo. Não crie nem altere nada.","type":"string"}]},"options":{}},"id":"122","name":"Carregar pedido fictício","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[-340,0]},
+    {"parameters":{"promptType":"define","text":"={{ $json.pedido }}","options":{"systemMessage":"Você é o Assistente de Planejamento do laboratório. Use apenas as ferramentas disponíveis e somente dados retornados por elas. Para horários, consulte a agenda. Para pendências, consulte os registros. Não crie, altere, envie nem exclua nada. Apresente um rascunho com as seções Compromissos e Registros. Distinga zero itens de falha da fonte.","maxIterations":6}},"id":"123","name":"Assistente de Planejamento","type":"@n8n/n8n-nodes-langchain.agent","typeVersion":2.2,"position":[-60,0]},
+    {"parameters":{"options":{}},"id":"124","name":"Modelo de conversa OpenAI","type":"@n8n/n8n-nodes-langchain.lmChatOpenAi","typeVersion":1.2,"position":[-220,240]},
+    {"parameters":{"description":"Consulta compromissos fictícios em um intervalo. Somente leitura; não cria, altera ou exclui eventos.","workflowId":{"__rl":true,"value":"","mode":"list"},"workflowInputs":{"mappingMode":"defineBelow","value":{},"matchingColumns":[],"schema":[],"attemptToConvertTypes":false,"convertFieldsToString":false}},"id":"125","name":"Consultar agenda de teste","type":"@n8n/n8n-nodes-langchain.toolWorkflow","typeVersion":2.2,"position":[20,240]},
+    {"parameters":{"description":"Consulta registros fictícios pelo status. Somente leitura; não acrescenta, altera ou exclui linhas.","workflowId":{"__rl":true,"value":"","mode":"list"},"workflowInputs":{"mappingMode":"defineBelow","value":{},"matchingColumns":[],"schema":[],"attemptToConvertTypes":false,"convertFieldsToString":false}},"id":"126","name":"Consultar registros de teste","type":"@n8n/n8n-nodes-langchain.toolWorkflow","typeVersion":2.2,"position":[220,240]}
+  ],
+  "connections":{
+    "Executar manualmente":{"main":[[{"node":"Carregar pedido fictício","type":"main","index":0}]]},
+    "Carregar pedido fictício":{"main":[[{"node":"Assistente de Planejamento","type":"main","index":0}]]},
+    "Modelo de conversa OpenAI":{"ai_languageModel":[[{"node":"Assistente de Planejamento","type":"ai_languageModel","index":0}]]},
+    "Consultar agenda de teste":{"ai_tool":[[{"node":"Assistente de Planejamento","type":"ai_tool","index":0}]]},
+    "Consultar registros de teste":{"ai_tool":[[{"node":"Assistente de Planejamento","type":"ai_tool","index":0}]]}
+  },
+  "pinData":{},"active":false,"settings":{"executionOrder":"v1"},"versionId":"10c00000-0000-4000-8000-000000000003","meta":{"templateCredsSetupCompleted":false},"tags":[]
+}

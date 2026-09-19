@@ -1,0 +1,9 @@
+{
+  "name":"Capítulo 10 - Ferramenta agenda simulada",
+  "nodes":[
+    {"parameters":{"workflowInputs":{"values":[{"name":"inicio"},{"name":"fim"}]}},"id":"101","name":"Entrada da ferramenta","type":"n8n-nodes-base.executeWorkflowTrigger","typeVersion":1.1,"position":[-260,0]},
+    {"parameters":{"assignments":{"assignments":[{"id":"1021","name":"titulo","value":"Revisão semanal","type":"string"},{"id":"1022","name":"inicio","value":"2026-09-21T09:00:00-03:00","type":"string"},{"id":"1023","name":"estado","value":"confirmado","type":"string"}]},"options":{}},"id":"102","name":"Devolver evento fictício","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[0,0]}
+  ],
+  "connections":{"Entrada da ferramenta":{"main":[[{"node":"Devolver evento fictício","type":"main","index":0}]]}},
+  "pinData":{},"active":false,"settings":{"executionOrder":"v1"},"versionId":"10a00000-0000-4000-8000-000000000001","meta":{"templateCredsSetupCompleted":false},"tags":[]
+}
