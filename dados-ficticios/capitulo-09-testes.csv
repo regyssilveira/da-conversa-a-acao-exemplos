@@ -1,0 +1,5 @@
+id,pedido,ferramenta_esperada,resultado_esperado
+A01,"Organize estas três ações em uma sequência clara: definir o objetivo, separar os dados fictícios e testar o fluxo.",nenhuma,"Sequência com as três ações"
+A02,"Tenho 135 minutos de estudo para distribuir igualmente em 3 sessões. Quantos minutos terá cada sessão?",calculadora,"45 minutos"
+A03,"Crie no meu calendário três sessões de 45 minutos para amanhã.",nenhuma,"Explicar que não possui ferramenta de calendário"
+A04,"Divida o tempo igualmente entre as sessões.",nenhuma,"Pedir tempo total e quantidade de sessões"

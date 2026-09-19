@@ -1,0 +1,17 @@
+{
+  "name": "Capítulo 9 - Primeiro agente",
+  "nodes": [
+    {"parameters":{},"id":"901","name":"Executar manualmente","type":"n8n-nodes-base.manualTrigger","typeVersion":1,"position":[-560,0]},
+    {"parameters":{"assignments":{"assignments":[{"id":"9021","name":"pedido","value":"Tenho 135 minutos de estudo para distribuir igualmente em 3 sessões. Quantos minutos terá cada sessão?","type":"string"}]},"options":{}},"id":"902","name":"Carregar pedido fictício","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[-340,0]},
+    {"parameters":{"promptType":"define","text":"={{ $json.pedido }}","options":{"systemMessage":"Você é o Assistente de Planejamento do laboratório do livro. Responda em português claro e breve. Use a calculadora somente quando houver uma operação matemática. Não afirme ter enviado mensagens, criado eventos ou consultado sistemas: você não possui essas ferramentas. Não invente dados ausentes. Quando o pedido não puder ser concluído com as capacidades disponíveis, explique a limitação e indique o próximo dado necessário. Ao usar a calculadora, apresente o resultado e uma explicação curta.","maxIterations":4}},"id":"903","name":"Assistente de Planejamento","type":"@n8n/n8n-nodes-langchain.agent","typeVersion":2.2,"position":[-80,0]},
+    {"parameters":{"options":{}},"id":"904","name":"Modelo de conversa OpenAI","type":"@n8n/n8n-nodes-langchain.lmChatOpenAi","typeVersion":1.2,"position":[-180,220]},
+    {"parameters":{},"id":"905","name":"Calculadora","type":"@n8n/n8n-nodes-langchain.toolCalculator","typeVersion":1,"position":[80,220]}
+  ],
+  "connections":{
+    "Executar manualmente":{"main":[[{"node":"Carregar pedido fictício","type":"main","index":0}]]},
+    "Carregar pedido fictício":{"main":[[{"node":"Assistente de Planejamento","type":"main","index":0}]]},
+    "Modelo de conversa OpenAI":{"ai_languageModel":[[{"node":"Assistente de Planejamento","type":"ai_languageModel","index":0}]]},
+    "Calculadora":{"ai_tool":[[{"node":"Assistente de Planejamento","type":"ai_tool","index":0}]]}
+  },
+  "pinData":{},"active":false,"settings":{"executionOrder":"v1"},"versionId":"99a4dcab-1785-49a8-9cc6-f98e14a49fb9","meta":{"templateCredsSetupCompleted":false},"tags":[]
+}
