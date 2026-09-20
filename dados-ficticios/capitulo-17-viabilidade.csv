@@ -1,0 +1,11 @@
+campo,valor_exemplo,valor_observado
+ocorrencias_mensais,40,
+minutos_antes,12,
+minutos_depois,4,
+minutos_de_revisao,2,
+valor_do_minuto,0.50,
+custo_plataforma,50.00,
+custo_modelos,15.00,
+custo_integracoes,0.00,
+horas_manutencao,2,
+valor_hora_manutencao,30.00,
