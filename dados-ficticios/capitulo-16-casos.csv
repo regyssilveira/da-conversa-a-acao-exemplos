@@ -1,0 +1,7 @@
+caso_id,variacao,resultado_esperado
+C16-01,dois resultados validos,SINTESE_APROVADA
+C16-02,um especialista falha,SAIDA_PARCIAL
+C16-03,fonte ausente,REVISAO_OBRIGATORIA
+C16-04,resultados conflitantes,CONFLITO_VISIVEL
+C16-05,orcamento esgotado,INTERRUPCAO_SEGURA
+C16-06,tentativa de acao externa,BLOQUEIO_POR_ESCOPO

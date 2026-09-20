@@ -1,0 +1,12 @@
+{
+  "name":"Capítulo 16 - Coordenação simulada",
+  "nodes":[
+    {"parameters":{},"id":"1601","name":"Executar manualmente","type":"n8n-nodes-base.manualTrigger","typeVersion":1,"position":[-700,0]},
+    {"parameters":{"assignments":{"assignments":[{"id":"p1","name":"pedido","value":"Preparar orientação sobre atendimento e aprovação de mensagens","type":"string"},{"id":"p2","name":"orcamento_chamadas","value":2,"type":"number"}]}} ,"id":"1602","name":"Coordenar tarefas","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[-470,0]},
+    {"parameters":{"assignments":{"assignments":[{"id":"a1","name":"tarefa_a","value":"Atendimento: segunda a sexta, das 9h às 17h.","type":"string"},{"id":"a2","name":"fonte_a","value":"DOC-01#horarios","type":"string"},{"id":"a3","name":"status_a","value":"OK","type":"string"}]}} ,"id":"1603","name":"Especialista A","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[-220,-110]},
+    {"parameters":{"assignments":{"assignments":[{"id":"b1","name":"tarefa_b","value":"Mensagens a terceiros exigem aprovação humana.","type":"string"},{"id":"b2","name":"fonte_b","value":"DOC-03#envio","type":"string"},{"id":"b3","name":"status_b","value":"OK","type":"string"}]}} ,"id":"1604","name":"Especialista B","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[20,-110]},
+    {"parameters":{"assignments":{"assignments":[{"id":"r1","name":"revisao","value":"APROVADO","type":"string"},{"id":"r2","name":"sintese","value":"Atendimento em horário útil; qualquer mensagem externa permanece em rascunho até aprovação.","type":"string"}]}} ,"id":"1605","name":"Revisar síntese","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[270,0]}
+  ],
+  "connections":{"Executar manualmente":{"main":[[{"node":"Coordenar tarefas","type":"main","index":0}]]},"Coordenar tarefas":{"main":[[{"node":"Especialista A","type":"main","index":0}]]},"Especialista A":{"main":[[{"node":"Especialista B","type":"main","index":0}]]},"Especialista B":{"main":[[{"node":"Revisar síntese","type":"main","index":0}]]}},
+  "pinData":{},"active":false,"settings":{"executionOrder":"v1"},"versionId":"16000000-0000-4000-8000-000000000001","meta":{"templateCredsSetupCompleted":false},"tags":[]
+}
