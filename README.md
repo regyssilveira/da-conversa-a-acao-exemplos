@@ -13,6 +13,12 @@ Este repositório reúne os materiais atualizáveis do livro **Da Conversa à A�
 
 Os materiais serão publicados progressivamente durante a produção e a validação do livro. Use sempre a versão mais recente da pasta correspondente ao capítulo; o texto do livro não depende de uma tag ou de um commit específico.
 
+## Trilha mais recente
+
+O Capítulo 15 acrescenta consulta documental segura. Comece pelo workflow simulado,
+use os documentos e casos fictícios e só depois siga o guia opcional de busca
+semântica. A versão simulada não exige credenciais nem serviço pago.
+
 ## Estrutura
 
 - `projetos/`: guias completos, organizados pela sequência didática do livro;
