@@ -21,6 +21,24 @@ O Capítulo 15 acrescenta consulta documental segura. Comece pelo workflow simul
 use os documentos e casos fictícios e só depois siga o guia opcional de busca
 semântica. A versão simulada não exige credenciais nem serviço pago.
 
+## Laboratório Docker e execução real
+
+Consulte [laboratorio/README.md](laboratorio/README.md) para subir uma instância
+local restrita à própria máquina. A imagem de referência testada é n8n 2.44.6.
+`node tools/test_n8n_docker.mjs` executa cenários completos no motor real;
+`node tools/test_n8n_adapters.mjs` verifica chamadas de subfluxos e agentes com
+um provedor local de respostas fixas. Este último **não testa inteligência do
+modelo nem a API da OpenAI**. Os relatórios locais ficam em `dist/`.
+
+Os capítulos 15 e 16 agora verificam suas regras, em vez de apresentar saídas
+aprovadas constantes. A recuperação documental continua sendo uma demonstração
+limitada por palavras; a coordenação compara duas afirmações exatas.
+
+As integrações Google, OpenAI e Telegram exigem credenciais próprias. A importação
+dos arquivos e o bloqueio por falta de credencial não equivalem a testes de
+autenticação ou de operações externas. O Telegram Trigger também exige um
+endereço HTTPS público, ausente no laboratório restrito a `localhost`.
+
 ## Estrutura
 
 - `projetos/`: guias completos, organizados pela sequência didática do livro;

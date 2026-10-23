@@ -23,6 +23,16 @@ No gatilho, confira `status`. No chamador, forneça `novo`. Depois de testar a s
 
 ## Agente
 
+Na versão simulada, peça o panorama de **21 de setembro de 2026**. Não use
+“amanhã” contra os dados fixos. Ao migrar para dados atuais, informe ao modelo
+a data de referência e o fuso e use um intervalo correspondente aos eventos.
+
 Em cada Call n8n Workflow Tool, selecione o subfluxo pelo nome e atualize as entradas. Primeiro fixe os valores; só então permita valores definidos pelo modelo, conservando os filtros do subfluxo. Restrinja os fluxos autorizados a chamar a ferramenta nas configurações do subfluxo, conforme o ambiente permitir. Não amplie intervalo apenas para satisfazer um pedido do modelo.
+
+No n8n 2.44.6 testado, publique os dois subfluxos de dados fictícios antes da
+chamada pelo agente. Mesmo com o agente concluído em verde, uma ferramenta não
+publicada pode devolver `Workflow is not active and cannot be executed.` O texto
+significa “o fluxo não está ativo e não pode ser executado”. Não aceite o verde
+como prova de consulta: expanda a saída de cada ferramenta e confira os dados.
 
 Documentação verificada em 23/10/2026: https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.executeworkflowtrigger/ e https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.toolworkflow/.

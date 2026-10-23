@@ -1,0 +1,298 @@
+{
+  "data": "2026-10-23",
+  "n8n": "2.44.6",
+  "imagem": "sha256:d02752c6ab446ae9db8deec2f9cc887c378f77cdcad31650814df936b7386dfb",
+  "nosReconhecidos": 88,
+  "workflowsImportados": 21,
+  "cenarios": [
+    {
+      "cenario": "05 resumo",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "07 triagem simulada",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "08 revisao",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "08 alta",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "08 normal",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "08 inesperada",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "08 revisao prevalece",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "11 permitida",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "11 usuario errado",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "11 chat errado",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "12 planejador-diario",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "12 preparador-reuniao",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "12 relatorio-semanal",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "12 preco 89.9",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "12 preco 100",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "12 preco 100.01",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "13 aprovado",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "13 rejeitado",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "13 sem aprovacao",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "13 expirado",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "13 conteudo alterado",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "13 identidade",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "13 duplicado",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "14 entrada true",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "14 entrada false",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "14 semana",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "14 vazio",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "14 invalido",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "14 JSON quebrado",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "15 horario",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "15 exclusao",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "15 reembolso",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "15 instrucao",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "15 duas fontes",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "16 valido",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "16 falha",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "16 sem fonte",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "16 conflito",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "16 orcamento",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "16 acao externa",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "10 agenda 40",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "10 agenda 41",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "10 agenda 42",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "10 registros novo",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "10 registros todos",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "DEPENDENCIA capitulo-06-agenda-para-lista.json",
+      "resultado": "BLOCKED"
+    },
+    {
+      "cenario": "DEPENDENCIA capitulo-06-informacao-para-planilha.json",
+      "resultado": "BLOCKED"
+    },
+    {
+      "cenario": "DEPENDENCIA capitulo-07-triagem-openai.json",
+      "resultado": "BLOCKED"
+    },
+    {
+      "cenario": "DEPENDENCIA capitulo-09-primeiro-agente.json",
+      "resultado": "BLOCKED"
+    },
+    {
+      "cenario": "DEPENDENCIA capitulo-10-agente-planejador.json",
+      "resultado": "BLOCKED"
+    },
+    {
+      "cenario": "DEPENDENCIA capitulo-11-assistente-telegram.json",
+      "resultado": "BLOCKED"
+    }
+  ],
+  "adaptadores": [
+    {
+      "cenario": "calllabadapteragenda",
+      "resultado": "PASS",
+      "saida": {
+        "status": "OK",
+        "eventos": [
+          {
+            "titulo": "Revisão semanal",
+            "inicio": "2026-09-21T09:00:00-03:00",
+            "estado": "confirmado"
+          }
+        ]
+      }
+    },
+    {
+      "cenario": "calllabadapterregistros",
+      "resultado": "PASS",
+      "saida": {
+        "status": "OK",
+        "registros": [
+          {
+            "data": "2026-09-21",
+            "assunto": "Preparar pauta",
+            "status": "novo",
+            "observacao": "Registro fictício"
+          }
+        ]
+      }
+    },
+    {
+      "cenario": "labadapter07",
+      "resultado": "PASS",
+      "saida": {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": {
+            "categoria": "tarefa",
+            "urgencia": "alta",
+            "resumo": "Revisar os slides até amanhã à tarde.",
+            "precisa_revisao": false
+          }
+        },
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "cenario": "labadapter09",
+      "resultado": "PASS",
+      "saida": {
+        "output": "45"
+      }
+    },
+    {
+      "cenario": "labadapter10",
+      "resultado": "PASS",
+      "saida": {
+        "output": "[\n  {\n    \"status\": \"OK\",\n    \"registros\": [\n      {\n        \"data\": \"2026-09-21\",\n        \"assunto\": \"Preparar pauta\",\n        \"status\": \"novo\",\n        \"observacao\": \"Registro fictício\"\n      }\n    ]\n  }\n]\n[\n  {\n    \"status\": \"OK\",\n    \"eventos\": [\n      {\n        \"titulo\": \"Revisão semanal\",\n        \"inicio\": \"2026-09-21T09:00:00-03:00\",\n        \"estado\": \"confirmado\"\n      }\n    ]\n  }\n]"
+      }
+    }
+  ],
+  "retesteDocumental": [
+    {
+      "cenario": "15 horario",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "15 exclusao",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "15 reembolso",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "15 instrucao",
+      "resultado": "PASS"
+    },
+    {
+      "cenario": "15 duas fontes",
+      "resultado": "PASS"
+    }
+  ],
+  "limite": "Adaptadores usam respostas locais fixas; nenhum teste contra OpenAI real. Google, Telegram e demais evolucoes externas dependem de credenciais. Telegram Trigger nao pode ser iniciado diretamente por essa CLI."
+}
