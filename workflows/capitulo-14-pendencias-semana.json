@@ -1,0 +1,143 @@
+{
+  "name": "Capítulo 14 - Pendências da semana",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual",
+      "name": "Executar manualmente",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -650,
+        0
+      ]
+    },
+    {
+      "name": "Preparar dados",
+      "id": "Preparar dados",
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0",
+              "name": "data_referencia",
+              "value": "2026-09-21",
+              "type": "string"
+            },
+            {
+              "id": "1",
+              "name": "dias",
+              "value": 7,
+              "type": "number"
+            },
+            {
+              "id": "2",
+              "name": "dados",
+              "value": "[\n  {\n    \"id\": \"P-01\",\n    \"titulo\": \"Separar pauta\",\n    \"prazo\": \"2026-09-23\",\n    \"estado\": \"aberta\"\n  },\n  {\n    \"id\": \"P-02\",\n    \"titulo\": \"Revisar anexos\",\n    \"prazo\": \"2026-09-21\",\n    \"estado\": \"aberta\"\n  },\n  {\n    \"id\": \"P-03\",\n    \"titulo\": \"Arquivar ata\",\n    \"prazo\": \"2026-09-22\",\n    \"estado\": \"concluida\"\n  }\n]",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -420,
+        0
+      ]
+    },
+    {
+      "name": "Selecionar pendências",
+      "id": "Selecionar pendências",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -160,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const entrada = $input.first().json;\nconst fail = (motivo) => [{json:{situacao:'REVISAO', resumo:'Entrada precisa de revisão: '+motivo, selecionados:[], motivo}}];\nfunction dia(valor) {\n  if (typeof valor !== 'string' || !/^\\d{4}-\\d{2}-\\d{2}$/.test(valor)) return null;\n  const data = new Date(valor+'T00:00:00Z');\n  return Number.isFinite(data.getTime()) && data.toISOString().slice(0,10) === valor ? data.getTime() : null;\n}\nconst inicio = dia(entrada.data_referencia);\nconst dias = Number(entrada.dias);\nif (inicio === null || !Number.isInteger(dias) || dias < 1 || dias > 31) return fail('período inválido');\nlet registros;\ntry { registros = JSON.parse(entrada.dados); } catch { return fail('lista JSON inválida'); }\nif (!Array.isArray(registros)) return fail('dados não são uma lista');\nconst ids = new Set();\nfor (const r of registros) {\n  if (!r || typeof r.id !== 'string' || !r.id.trim() || typeof r.titulo !== 'string' || !r.titulo.trim() || dia(r.prazo) === null || !['aberta','concluida'].includes(r.estado)) return fail('registro incompleto ou inválido: '+(r?.id || 'sem id'));\n  if (ids.has(r.id)) return fail('identificador duplicado: '+r.id);\n  ids.add(r.id);\n}\nconst fim = inicio + dias * 86400000;\nconst selecionados = registros.filter(r => r.estado === 'aberta' && dia(r.prazo) >= inicio && dia(r.prazo) < fim)\n  .sort((a,b) => a.prazo.localeCompare(b.prazo) || a.id.localeCompare(b.id));\nconst resumo = selecionados.length ? selecionados.map(r => r.id+' | '+r.prazo+' | '+r.titulo).join('\\n') : 'Nenhuma pendência no período.';\nreturn [{json:{situacao:selecionados.length ? 'OK' : 'VAZIO', resumo, selecionados, quantidade:selecionados.length}}];"
+      }
+    },
+    {
+      "name": "Mostrar lista",
+      "id": "Mostrar lista",
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0",
+              "name": "resumo",
+              "value": "={{ $json.resumo }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        120,
+        0
+      ]
+    },
+    {
+      "name": "Reunir linhas da planilha",
+      "id": "Reunir linhas da planilha",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -420,
+        260
+      ],
+      "parameters": {
+        "jsCode": "const itens=$input.all().map(i=>i.json); const primeiro=itens[0] || {}; return [{json:{data_referencia:primeiro.data_referencia || '2026-09-21',dias:primeiro.dias || 7,dados:JSON.stringify(itens.map(({id,titulo,prazo,estado})=>({id,titulo,prazo,estado})))}}];"
+      },
+      "disabled": true
+    }
+  ],
+  "connections": {
+    "Executar manualmente": {
+      "main": [
+        [
+          {
+            "node": "Preparar dados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar dados": {
+      "main": [
+        [
+          {
+            "node": "Selecionar pendências",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Selecionar pendências": {
+      "main": [
+        [
+          {
+            "node": "Mostrar lista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

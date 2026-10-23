@@ -1,13 +1,273 @@
 {
-  "name":"Capítulo 13 - Aprovação humana simulada",
-  "nodes":[
-    {"parameters":{},"id":"1301","name":"Executar manualmente","type":"n8n-nodes-base.manualTrigger","typeVersion":1,"position":[-700,0]},
-    {"parameters":{"assignments":{"assignments":[{"id":"e1","name":"pedido_id","value":"PED-1301","type":"string"},{"id":"e2","name":"destino","value":"destinatario@example.invalid","type":"string"},{"id":"e3","name":"assunto","value":"Confirmação do laboratório","type":"string"},{"id":"e4","name":"corpo","value":"Confirmamos o recebimento do material fictício usado no laboratório.","type":"string"},{"id":"e5","name":"fonte_id","value":"REG-1301","type":"string"},{"id":"e6","name":"decisao","value":"aprovado","type":"string"},{"id":"e7","name":"conteudo_aprovado","value":true,"type":"boolean"},{"id":"e8","name":"chave_execucao","value":"PED-1301-v1","type":"string"}]}},"id":"1302","name":"Montar pacote de aprovação","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[-470,0]},
-    {"parameters":{"rules":{"values":[{"conditions":{"options":{"caseSensitive":true,"typeValidation":"strict"},"conditions":[{"leftValue":"={{ $json.decisao }}","rightValue":"aprovado","operator":{"type":"string","operation":"equals"}}],"combinator":"and"},"renameOutput":true,"outputKey":"aprovado"},{"conditions":{"options":{"caseSensitive":true,"typeValidation":"strict"},"conditions":[{"leftValue":"={{ $json.decisao }}","rightValue":"rejeitado","operator":{"type":"string","operation":"equals"}}],"combinator":"and"},"renameOutput":true,"outputKey":"rejeitado"}]},"options":{"fallbackOutput":"extra","renameFallbackOutput":"expirado"}},"id":"1303","name":"Rota da decisão","type":"n8n-nodes-base.switch","typeVersion":3.2,"position":[-220,0]},
-    {"parameters":{"conditions":{"options":{"caseSensitive":true,"typeValidation":"strict"},"conditions":[{"leftValue":"={{ $json.conteudo_aprovado }}","rightValue":true,"operator":{"type":"boolean","operation":"true","singleValue":true}}],"combinator":"and"}},"id":"1304","name":"Conteúdo ainda é o aprovado?","type":"n8n-nodes-base.if","typeVersion":2.2,"position":[20,-100]},
-    {"parameters":{"assignments":{"assignments":[{"id":"e9","name":"resultado","value":"ENVIO_SIMULADO_UNICO","type":"string"}]}},"id":"1305","name":"Simular envio único","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[270,-100]},
-    {"parameters":{},"id":"1306","name":"Encerrar sem enviar","type":"n8n-nodes-base.noOp","typeVersion":1,"position":[270,120]}
+  "name": "Capítulo 13 - Aprovação humana simulada",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual",
+      "name": "Executar manualmente",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -650,
+        0
+      ]
+    },
+    {
+      "name": "Montar pacote de aprovação",
+      "id": "Montar pacote de aprovação",
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0",
+              "name": "pedido_id",
+              "value": "PED-1301",
+              "type": "string"
+            },
+            {
+              "id": "1",
+              "name": "versao",
+              "value": "v1",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "destino",
+              "value": "destinatario@example.invalid",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "assunto",
+              "value": "Confirmação do laboratório",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "corpo",
+              "value": "Confirmamos o recebimento do material fictício usado no laboratório.",
+              "type": "string"
+            },
+            {
+              "id": "5",
+              "name": "fonte_id",
+              "value": "REG-1301",
+              "type": "string"
+            },
+            {
+              "id": "6",
+              "name": "decisao",
+              "value": "aprovado",
+              "type": "string"
+            },
+            {
+              "id": "7",
+              "name": "aprovador",
+              "value": "OPERADOR-LAB",
+              "type": "string"
+            },
+            {
+              "id": "8",
+              "name": "aprovador_permitido",
+              "value": "OPERADOR-LAB",
+              "type": "string"
+            },
+            {
+              "id": "9",
+              "name": "destino_aprovado",
+              "value": "destinatario@example.invalid",
+              "type": "string"
+            },
+            {
+              "id": "10",
+              "name": "assunto_aprovado",
+              "value": "Confirmação do laboratório",
+              "type": "string"
+            },
+            {
+              "id": "11",
+              "name": "corpo_aprovado",
+              "value": "Confirmamos o recebimento do material fictício usado no laboratório.",
+              "type": "string"
+            },
+            {
+              "id": "12",
+              "name": "agora_teste",
+              "value": "2026-09-21T09:00:00-03:00",
+              "type": "string"
+            },
+            {
+              "id": "13",
+              "name": "expira_em",
+              "value": "2026-09-21T10:00:00-03:00",
+              "type": "string"
+            },
+            {
+              "id": "14",
+              "name": "historico_chaves",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -420,
+        0
+      ]
+    },
+    {
+      "name": "Verificar autorização",
+      "id": "Verificar autorização",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -160,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const e = $input.first().json;\nconst out = (motivo) => [{json:{...e,permitido:false,resultado:motivo}}];\nconst campos = ['pedido_id','destino','assunto','corpo','fonte_id','versao','aprovador','aprovador_permitido','destino_aprovado','assunto_aprovado','corpo_aprovado','agora_teste','expira_em'];\nif (campos.some(k => typeof e[k] !== 'string' || !e[k].trim())) return out('BLOQUEADO_CAMPO');\nif (e.decisao !== 'aprovado') return out(e.decisao === 'rejeitado' ? 'BLOQUEADO_REJEITADO' : 'BLOQUEADO_SEM_APROVACAO');\nif (e.aprovador !== e.aprovador_permitido) return out('BLOQUEADO_IDENTIDADE');\nconst agora = Date.parse(e.agora_teste), expira = Date.parse(e.expira_em);\nif (!Number.isFinite(agora) || !Number.isFinite(expira) || agora >= expira) return out('BLOQUEADO_EXPIRADO');\nif (e.destino !== e.destino_aprovado || e.assunto !== e.assunto_aprovado || e.corpo !== e.corpo_aprovado) return out('BLOQUEADO_CONTEUDO');\nconst chave = e.pedido_id+'-'+e.versao;\nif (typeof e.historico_chaves !== 'string') return out('BLOQUEADO_HISTORICO');\nconst historico = e.historico_chaves.split(',').map(x=>x.trim()).filter(Boolean);\nif (historico.includes(chave)) return out('BLOQUEADO_DUPLICADO');\nreturn [{json:{...e,chave_execucao:chave,permitido:true,resultado:'PRONTO_PARA_SIMULAR',historico_proposto:[...historico,chave].join(',')}}];"
+      }
+    },
+    {
+      "name": "Aprovação válida?",
+      "id": "if",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        80,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.permitido }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "name": "Simular envio",
+      "id": "Simular envio",
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0",
+              "name": "resultado",
+              "value": "ENVIO_SIMULADO",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        320,
+        -100
+      ]
+    },
+    {
+      "name": "Mostrar bloqueio",
+      "id": "Mostrar bloqueio",
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0",
+              "name": "motivo",
+              "value": "={{ $json.resultado }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        320,
+        100
+      ]
+    }
   ],
-  "connections":{"Executar manualmente":{"main":[[{"node":"Montar pacote de aprovação","type":"main","index":0}]]},"Montar pacote de aprovação":{"main":[[{"node":"Rota da decisão","type":"main","index":0}]]},"Rota da decisão":{"main":[[{"node":"Conteúdo ainda é o aprovado?","type":"main","index":0}],[{"node":"Encerrar sem enviar","type":"main","index":0}],[{"node":"Encerrar sem enviar","type":"main","index":0}]]},"Conteúdo ainda é o aprovado?":{"main":[[{"node":"Simular envio único","type":"main","index":0}],[{"node":"Encerrar sem enviar","type":"main","index":0}]]}},
-  "pinData":{},"active":false,"settings":{"executionOrder":"v1"},"versionId":"13000000-0000-4000-8000-000000000001","meta":{"templateCredsSetupCompleted":false},"tags":[]
+  "connections": {
+    "Executar manualmente": {
+      "main": [
+        [
+          {
+            "node": "Montar pacote de aprovação",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar pacote de aprovação": {
+      "main": [
+        [
+          {
+            "node": "Verificar autorização",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verificar autorização": {
+      "main": [
+        [
+          {
+            "node": "Aprovação válida?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aprovação válida?": {
+      "main": [
+        [
+          {
+            "node": "Simular envio",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mostrar bloqueio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
 }

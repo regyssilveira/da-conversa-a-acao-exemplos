@@ -15,6 +15,8 @@ Os materiais serão publicados progressivamente durante a produção e a valida�
 
 ## Trilha mais recente
 
+A revisão de 23/10/2026 acrescenta guias operacionais dos capítulos 7, 10, 12, 13 e 14. Os três projetos do capítulo 12 calculam suas saídas a partir das listas fictícias; o capítulo 13 verifica condições de autorização sem enviar mensagens; o capítulo 14 demonstra uma adaptação completa de pendências. Rode `node tools/test_jornada_leitor.mjs` para conferir a lógica local e as conexões dos arquivos. Isso não substitui importação no n8n nem testes com serviços externos.
+
 O Capítulo 15 acrescenta consulta documental segura. Comece pelo workflow simulado,
 use os documentos e casos fictícios e só depois siga o guia opcional de busca
 semântica. A versão simulada não exige credenciais nem serviço pago.
