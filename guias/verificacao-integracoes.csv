@@ -1,0 +1,13 @@
+caso,capitulo,verificacao,resultado_esperado,estado,resultado_observado,data,versao_n8n,modelo
+G-01,6,ler calendario secundario,eventos iguais aos da fonte,NAO_EXECUTADO,,,,
+G-02,6,ler periodo vazio,zero eventos sem falso erro,NAO_EXECUTADO,,,,
+G-03,6,acrescentar linha ficticia,quatro campos conferidos na planilha,NAO_EXECUTADO,,,,
+O-01,7,classificar texto simples,quatro campos validos,NAO_EXECUTADO,,,,
+O-02,7,classificar texto ambiguo,revisao solicitada,NAO_EXECUTADO,,,,
+O-03,9,pedir 135 dividido por 3,calculadora chamada e retorno 45,NAO_EXECUTADO,,,,
+O-04,10,consultar duas fontes,duas observacoes conferidas,NAO_EXECUTADO,,,,
+T-01,11,texto autorizado,resposta somente no chat de origem,NAO_EXECUTADO,,,,
+T-02,11,texto acima do limite,agente nao chamado,NAO_EXECUTADO,,,,
+M-01,13,rejeitar pedido,nenhum envio final,NAO_EXECUTADO,,,,
+M-02,13,aprovar pedido expirado,envio bloqueado,NAO_EXECUTADO,,,,
+M-03,13,repetir chave,nenhum segundo envio,NAO_EXECUTADO,,,,

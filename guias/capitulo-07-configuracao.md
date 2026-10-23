@@ -2,6 +2,12 @@
 
 Verificação documental: 23/10/2026. Este guia não comprova uma chamada paga na conta do leitor.
 
+Não houve chamada real à OpenAI na validação desta edição. A execução com respostas
+locais fixas comprovou o encadeamento, não a interpretação, a cobrança nem o acesso
+ao modelo. Você pode concluir a simulação sem criar credencial. Para o caminho
+conectado, siga os passos abaixo e registre o resultado efetivamente observado em
+`guias/verificacao-integracoes.csv`; não marque como aprovado apenas por importar.
+
 1. Importe `workflows/capitulo-07-triagem-simulada.json`. Execute e confira categoria, urgencia, resumo e precisa_revisao em **Exibir quatro campos**. Não exige conta externa.
 2. Para chamada real, siga https://docs.n8n.io/integrations/builtin/credentials/openai/. Entre em https://platform.openai.com, confira cobrança e acesso, gere uma chave em https://platform.openai.com/api-keys e salve somente na credencial protegida do n8n.
 3. Importe `workflows/capitulo-07-triagem-openai.json`. O arquivo usa a operação de conversa; versões novas podem chamá-la **Generate a Chat Completion**, e antigas, **Message a Model**. Selecione a credencial e um modelo de texto disponível. O modelo indicado no arquivo é referência, não garantia de disponibilidade ou preço.

@@ -2,6 +2,11 @@
 
 Importe `workflows/capitulo-13-aprovacao-simulada.json`. O arquivo não chama modelo, não envia e-mail, não espera uma pessoa e não grava histórico entre execuções. Ele comprova as condições da autorização com valores fictícios editáveis.
 
+O Gmail e o registro persistente abaixo são roteiros documentais, não integrações
+reais testadas nesta edição. Para configurá-los, consulte também
+`guias/integracoes-e-validacao.md`. Não há export pronto de envio: os nós precisam
+ser montados e verificados pelo leitor. É possível concluir a simulação sem isso.
+
 ## Sequência de teste
 
 Abra **Montar pacote de aprovação**, altere uma condição e execute a partir do gatilho. Depois de cada caso, restaure o valor inicial.

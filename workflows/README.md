@@ -4,6 +4,11 @@ Os arquivos não contêm credenciais, segredos nem dados pessoais. Importe, abra
 cada nó e confira os campos antes de executar. Fonte de validação: n8n 2.44.6,
 23/10/2026. Não publique todos os fluxos automaticamente.
 
+As linhas que exigem contas externas representam estruturas a configurar, não
+integrações reais testadas nesta edição. Antes delas, siga
+`guias/integracoes-e-validacao.md`. O filtro do capítulo 11 também permite testar
+texto vazio, somente espaços e o limite de 1.000 caracteres sem bot nem token.
+
 | Arquivo (prefixo `capitulo-`) | O que demonstra | Configuração adicional |
 |---|---|---|
 | 05-primeiro-fluxo.json | resumo de compromisso | nenhuma |

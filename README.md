@@ -15,6 +15,14 @@ Os materiais serão publicados progressivamente durante a produção e a valida�
 
 ## Trilha mais recente
 
+**Antes de conectar contas:** leia [Integrações e validação](guias/integracoes-e-validacao.md).
+O guia distingue execução local, encadeamento com respostas fixas e roteiros
+documentais não testados com provedores reais. Você pode continuar pelos exemplos
+sem credenciais externas; isso não equivale a executar um agente com modelo real.
+Google, OpenAI real, Telegram e as evoluções Gmail permanecem sem validação
+ponta a ponta nesta edição. O guia preserva as instruções de configuração para
+quem optar por conectar e uma ficha de conferência sem dados pessoais.
+
 A revisão de 23/10/2026 acrescenta guias operacionais dos capítulos 7, 10, 12, 13 e 14. Os três projetos do capítulo 12 calculam suas saídas a partir das listas fictícias; o capítulo 13 verifica condições de autorização sem enviar mensagens; o capítulo 14 demonstra uma adaptação completa de pendências. Rode `node tools/test_jornada_leitor.mjs` para conferir a lógica local e as conexões dos arquivos. Isso não substitui importação no n8n nem testes com serviços externos.
 
 O Capítulo 15 acrescenta consulta documental segura. Comece pelo workflow simulado,

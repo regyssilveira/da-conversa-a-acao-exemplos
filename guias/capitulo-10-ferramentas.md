@@ -2,6 +2,12 @@
 
 Arquivos de entrada: `capitulo-10-ferramenta-agenda-simulada.json`, `capitulo-10-ferramenta-registros-simulada.json`, `capitulo-10-agente-planejador.json`, todos em `workflows/`.
 
+**Estado:** subfluxos e encadeamento executados com dados fictícios e respostas
+locais fixas; decisão de modelo e consultas Google reais não testadas. Sem
+credenciais, execute apenas o chamador determinístico. Para ligar o agente,
+configure credencial e modelo pelo capítulo 7, selecione os subfluxos e teste cada
+pedido. O guia `guias/integracoes-e-validacao.md` reúne a passagem ao serviço real.
+
 Os dois subfluxos usam dados fictícios, validam intervalo ou status e não consultam Google. A agenda aceita até 24 horas e devolve `eventos`; os registros aceitam somente `novo` e devolvem `registros`. Um pedido inválido devolve `erro`. O agente exige um provedor de modelo. Teste primeiro com um chamador determinístico: Manual Trigger → Edit Fields → Execute Sub-workflow. Selecione o subfluxo salvo e forneça datas ou status. O gatilho do subfluxo define os nomes recebidos.
 
 ## Agenda: testar chamada e depois consulta
